@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "21c6ac45-d4c7-4e2c-b0f9-b247730f9a42",
+		"name": "Films Manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24322236",
+		"_collection_link": "https://gold-moon-262961.postman.co/workspace/Films-Manager~7918ef10-ad5c-4ce9-b403-80c7866b9954/collection/24322236-21c6ac45-d4c7-4e2c-b0f9-b247730f9a42?action=share&source=collection_link&creator=24322236"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Users",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"test\",\r\n    \"name\": \"testName\",\r\n    \"surname\": \"testSurname\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "**Registrar usuario**\n\nRequest con el método “POST” para registrar un usuario.\n\n(Encripta password)\n\nResultados esperados:\n\n- Resultado exitoso 200 OK\n- Ausencia de parametros 400 Bad Request\n- Email ya registrado 409 Conflict"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/users/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						},
+						"description": "**Autenticar usuario**\n\nMétodo “POST” para autenticar a un usuario previamente registrado.\n\nResultados esperados:\n\n- Resultado exitoso y devuelve un token de acceso 200 OK\n- Ausencia de parametros 400 Bad Request\n- Password incorrecta 401 Unauthorized\n- Email no registrado 404 Not Found"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"logout"
+							]
+						},
+						"description": "**Capacidad de hacer Logout**  \nMétodo “POST” que permita que un “token” de autenticación pueda ser inválido.\n\nResultados esperados:\n\n- Resultado exitoso 200 OK\n- Token invalido 401 Unauthorized\n- Ausencia de token 401 Unauthorized\n- Token revocado o vencido 401 Unauthorized"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Films",
+			"item": [
+				{
+					"name": "Films",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/films?keyword=harry",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "harry"
+								}
+							]
+						},
+						"description": "**Obtener películas**  \nMétodo “GET” con el objetivo de obtener una lista de películas.  \nPermite proveer en el request un parámetro llamado keyword(no requerido) que la API  \nusará para filtrar resultados en la búsqueda.\n\nResultados esperados:\n\n- Resultado exitoso y devuelve lista de peliculas 200 OK\n- Token invalido 401 Unauthorized\n- Ausencia de token 401 Unauthorized\n- Token revocado o vencido 401 Unauthorized"
+					},
+					"response": []
+				},
+				{
+					"name": "Favourites",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "api_key",
+								"value": "0cbde4fcb3a1030b1306a933716f8f57",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 12\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/films/favourites",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								"favourites"
+							]
+						},
+						"description": "**Agregar película a favorito**\n\nMétodo “POST” con el objetivo de agregar una película a la lista de películas favoritas del usuario  \nautenticado.\n\nEn el body se le pasa simplemete el id de la película.\n\nUn usuario autenticado sólo tendrá acceso a agregar favoritos a su  \nlista de favoritos.\n\nResultados esperados:\n\n- Resultado exitoso 200 OK\n- Ausencia de parametros 400 Bad Request\n- Id Incorrecto 404 Not Found\n- Pelicula ya registrada para ese usuario 409 Conflict\n- Token invalido 401 Unauthorized\n- Ausencia de token 401 Unauthorized\n- Token revocado o vencido 401 Unauthorized"
+					},
+					"response": []
+				},
+				{
+					"name": "Favourites",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/films/favourites",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								"favourites"
+							]
+						},
+						"description": "**Obtener películas favoritas**  \nMétodo “GET” para obtener la lista de películas favoritas del usuario  \nautenticado.\n\nMuestra solo las películas agregadas por el usuario que realiza la consulta.\n\nResultados esperados:\n\n- Resultado exitoso y devuelve las peliculas de ese usuario 200 OK\n- Token invalido 401 Unauthorized\n- Ausencia de token 401 Unauthorized\n- Token revocado o vencido 401 Unauthorized"
+					},
+					"response": []
+				},
+				{
+					"name": "FilmByID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/films/12",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								"12"
+							]
+						},
+						"description": "**Obtener películas por ID**  \nMétodo “GET” que obtiene la información de una pelicula por medio de su ID.\n\nResultados esperados:\n\n- Resultado exitoso y devuelve la pelicula 200 OK\n- Id Incorrecto 404 Not Found\n- Token invalido 401 Unauthorized\n- Ausencia de token 401 Unauthorized\n- Token revocado o vencido 401 Unauthorized"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
