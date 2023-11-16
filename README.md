@@ -1,15 +1,17 @@
 # FilmsManager
 
-# Ejecutar en modo desarrollo:
+## Ejecutar en modo desarrollo:
 Simplemente ejecutar el siguiente comado 
 npm run dev
 
-# Ejecutar:
+## Ejecutar:
 
-1) Ejecutar el siguiente comando para realiza la compilación del código TypeScript en la carpeta build 
+1) Ejecutar npm install
+
+2) Ejecutar el siguiente comando para realiza la compilación del código TypeScript en la carpeta build 
 npm run tsc      
 
-2) Copiar carpeta collections (contiene los txt para persistir) en la ruta films-manager/build/data-access
+3) Copiar carpeta collections (contiene los txt para persistir) en la ruta films-manager/build/data-access
 
-3) Ejecutar npm start
+4) Ejecutar npm start
 
