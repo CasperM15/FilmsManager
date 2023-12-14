@@ -21,4 +21,8 @@ router.post('/logout', _sessionService.verificateToken, (req, res, next) => {
     _userController.logout(req, res, next);
 })
 
+router.get('/check', (_req, res, _next) => {
+    res.status(200).json({message: 'OK'});
+})
+
 export default router
