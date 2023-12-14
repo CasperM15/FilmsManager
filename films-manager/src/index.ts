@@ -11,7 +11,7 @@ app.use(express.json());
 
 const PORT = process.env.PORT;
 
-app.get('/', (_req, res) => {
+app.get('/test', (_req, res) => {
     res.status(200).json({ message: 'Test endpoint is working!' });
   });
 
