@@ -5,6 +5,16 @@
         "src": "src/index.ts", 
         "use": "@vercel/node"
       }
+    ],
+    "routes": [
+      {
+        "src": "/api/users/(.*)",
+        "dest": "/src/index.ts"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/src/index.ts"
+      }
     ]
   }
   
