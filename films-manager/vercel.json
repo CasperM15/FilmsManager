@@ -2,14 +2,23 @@
     "version": 2,
     "builds": [
       {
-        "src": "build/index.js",
+        "src": "src/index.ts", 
         "use": "@vercel/node"
       }
     ],
     "routes": [
       {
+        "src": "/api/films/(.*)",
+        "dest": "/src/delivery/routes/films/$1"
+      },
+      {
+        "src": "/api/users/(.*)",
+        "dest": "/src/delivery/routes/users/$1"
+      },
+      {
         "src": "/(.*)",
-        "dest": "/build/index.js"
+        "dest": "/src/index.ts"
       }
     ]
   }
+  
