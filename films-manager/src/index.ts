@@ -12,7 +12,7 @@ app.use(express.json());
 const PORT = process.env.PORT;
 
 app.get('/test', (_req, res) => {
-    res.status(200).json({ message: 'Test endpoint is working!' });
+    res.status(200).json({ message: 'Test endpoint is workingggg!' });
   });
 
 app.use('/api/films', filmsRouter);
