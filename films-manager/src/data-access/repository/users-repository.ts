@@ -12,7 +12,7 @@ class UsersRepository implements IUsersRepository {
     _users: string 
 
     constructor() {
-      this._users = path.join(__dirname, '..', 'collections', 'users.txt');
+      this._users = path.join(__dirname, '..', '..', '..', 'collections', 'users.txt');
     }
 
     getByEmail(user: User): Promise<User> {

@@ -13,7 +13,7 @@ class FavouritesRepository implements IFavouritesRepository {
     _favourites: string 
 
     constructor() {
-      this._favourites = path.join(__dirname, '..', 'collections', 'favourites.txt');
+      this._favourites = path.join(__dirname, '..', '..', '..', 'collections', 'favourites.txt');
     }
   
     save(favouriteFilm: FavouriteFilm): Promise<void> {
